@@ -68,7 +68,7 @@ def warp_transform(contour, img_rect):
 ## give an input, detect it's four properties
 def detect_card_properties(img, org_img):
 
-    show_image(img)
+    #show_image(img)
 
     img_copy = img.copy()
     contours, hierarchy = cv2.findContours(img_copy, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -98,8 +98,7 @@ def detect_card_properties(img, org_img):
         else:
             print "diamond:", hu[0]
         '''
-
-    show_image(org_img)
+    #show_image(org_img)
 
 
 
@@ -135,7 +134,7 @@ def detect_contours(img):
     #show_image(filtered_image)
 
     image_size = filtered_image.shape[0] * filtered_image.shape[1]
-    numcards = 2
+    numcards = 20
 
     tup = sorted(zip(contours, hierarchy[0]), key= lambda c:cv2.contourArea(c[0]), reverse=True)[:numcards]
     for t in tup:
@@ -155,7 +154,6 @@ def detect_contours(img):
         # !! fit a rectangle & print on the screen
         cv2.rectangle(img, (x,y),(x+w,y+h), (0,0,255), 2)
 
-        print img
         ## print this to a file or so
         filt_img_rect = filtered_image[y:y+h, x:x+w]
         img_rect = img[y:y+h, x:x+w]
@@ -164,7 +162,7 @@ def detect_contours(img):
 
         ## Draw contours on the image
         cv2.drawContours(img, [card], -1, (0, 255, 0), 2)
-    show_image(img, False)
+    show_image(img)
 
 def main():
     img = cv2.imread(sys.argv[1])
